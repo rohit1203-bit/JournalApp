@@ -6,6 +6,8 @@ import net.engineeringdigest.journalApp.entity.User;
 import net.engineeringdigest.journalApp.repository.JournalEntryRepository;
 import net.engineeringdigest.journalApp.repository.UserRepository;
 import org.bson.types.ObjectId;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,6 +28,10 @@ public class UserService {
 
     private static final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+//    private static final Logger logger = LoggerFactory.getLogger(UserService.class);
+//    when we use @Slf4j we do not need this logger declaration
+
+
     public boolean saveNewUser(User user){
         try{
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -33,6 +39,10 @@ public class UserService {
             userRepository.save(user);
             return true;
         }catch (Exception e){
+            log.info("hahahah");
+            log.error("Error Occurred for {}", user.getUserName(), e);
+//            logger.info("hahahah");
+//            logger.error("Error Occurred for {}", user.getUserName(), e);
             return false;
 //            log.error("Message", e);
         }
