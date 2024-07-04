@@ -1,9 +1,12 @@
 package net.engineeringdigest.journalApp.service;
 
 import net.engineeringdigest.journalApp.api.response.WeatherResponse;
+import net.engineeringdigest.journalApp.entity.User;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -25,10 +28,31 @@ public class WeatherService {
 
     public WeatherResponse getWeather(String city){
         String finalAPI=API.replace("CITY",city);
+
         ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
+
         WeatherResponse body = response.getBody();
         return body;
     }
+
+//    //this is the way to consume external POST API but this will not work in this case because
+//    //weather api is not made to handle the post method
+//    public WeatherResponse postWeather(String city){
+//        String finalAPI=API.replace("CITY",city);
+////        String requestBody= "{\n" + " \"userName\":\"rohit\",\n" + " \"password\":\"rohit\"\n" + "}";
+////        HttpEntity<String> httpEntity=new HttpEntity<>(requestBody);
+//
+//
+//        HttpHeaders httpHeaders = new HttpHeaders();
+//        httpHeaders.set("key","value");
+//        User user= User.builder().userName("rohit").password("rohit").build();
+//        HttpEntity<User> httpEntity=new HttpEntity<>(user, httpHeaders);
+//
+//        ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.POST, httpEntity, WeatherResponse.class);
+//
+//        WeatherResponse body = response.getBody();
+//        return body;
+//    }
 
 //    OkHttpClient client = new OkHttpClient();
 //
