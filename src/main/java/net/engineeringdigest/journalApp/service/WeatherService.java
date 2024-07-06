@@ -1,6 +1,8 @@
 package net.engineeringdigest.journalApp.service;
 
 import net.engineeringdigest.journalApp.api.response.WeatherResponse;
+import net.engineeringdigest.journalApp.cache.AppCache;
+import net.engineeringdigest.journalApp.constants.Placeholders;
 import net.engineeringdigest.journalApp.entity.User;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
@@ -24,16 +26,17 @@ public class WeatherService {
     private String apikey;
     //check for api key on weatherstack website
 
-    private static final String API ="http://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
+//    private static final String API ="http://api.weatherstack.com/current?access_key=API_KEY&query=CITY";
 
     @Autowired
     private RestTemplate restTemplate;
 
+    @Autowired
+    private AppCache appCache;
+
     public WeatherResponse getWeather(String city){
-        String finalAPI=API.replace("CITY",city);
-
+        String finalAPI=appCache.appCache.get(AppCache.keys.WEATHER_API.toString()).replace(Placeholders.CITY,city).replace(Placeholders.API_KEY,apikey);
         ResponseEntity<WeatherResponse> response = restTemplate.exchange(finalAPI, HttpMethod.GET, null, WeatherResponse.class);
-
         WeatherResponse body = response.getBody();
         return body;
     }
