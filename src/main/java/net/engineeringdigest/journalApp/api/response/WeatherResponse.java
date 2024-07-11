@@ -7,7 +7,8 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter
-@Setter public class WeatherResponse {
+@Setter
+public class WeatherResponse {
     private Current current;
 
     @Getter
@@ -18,6 +19,4 @@ import java.util.List;
         private List<String> weatherDescriptions;
         private int feelslike;
     }
-
-
 }
