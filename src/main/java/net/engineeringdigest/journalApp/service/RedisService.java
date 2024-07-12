@@ -16,6 +16,9 @@ public class RedisService {
     @Autowired
     private RedisTemplate redisTemplate;
 
+//    integrating redis cloud database with the help of public endpoint
+//    spring.redis.host, spring.redis.port, spring.redis.password
+
     public <T> T get(String key, Class<T> entityClass){
         try{
             Object o = redisTemplate.opsForValue().get(key);
