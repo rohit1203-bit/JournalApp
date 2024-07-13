@@ -19,12 +19,12 @@ public class RedisService {
 //    integrating redis cloud database with the help of public endpoint
 //    spring.redis.host, spring.redis.port, spring.redis.password
 
-    public <T> T get(String key, Class<T> entityClass){
-        try{
+    public <T> T get(String key, Class<T> entityClass) {
+        try {
             Object o = redisTemplate.opsForValue().get(key);
             ObjectMapper mapper = new ObjectMapper();
             return mapper.readValue(o.toString(), entityClass);
-        }catch (Exception e) {
+        } catch (Exception e) {
             log.error("Exception ", e);
             return null;
         }
