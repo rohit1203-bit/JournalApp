@@ -19,6 +19,7 @@ public class RedisService {
 //    integrating redis cloud database with the help of public endpoint
 //    spring.redis.host, spring.redis.port, spring.redis.password
 //    kafka part II
+//    Kafka Apache download, producer, consumer with key and without key
 
     public <T> T get(String key, Class<T> entityClass) {
         try {
