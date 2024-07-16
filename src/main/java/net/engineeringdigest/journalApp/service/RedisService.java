@@ -20,6 +20,7 @@ public class RedisService {
 //    spring.redis.host, spring.redis.port, spring.redis.password
 //    kafka part II
 //    Kafka Apache download, producer, consumer with key and without key
+//    Kafka topic, partitions, ordering, partitioner, round-robin
 
     public <T> T get(String key, Class<T> entityClass) {
         try {
