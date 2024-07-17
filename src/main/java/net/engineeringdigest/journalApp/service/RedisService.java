@@ -21,6 +21,7 @@ public class RedisService {
 //    kafka part II
 //    Kafka Apache download, producer, consumer with key and without key
 //    Kafka topic, partitions, ordering, partitioner, round-robin
+//    Kafka brokers cluster, consumer offset
 
     public <T> T get(String key, Class<T> entityClass) {
         try {
